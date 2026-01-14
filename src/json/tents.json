@@ -19,7 +19,8 @@
       "Name": "Marmot"
     },
     "ListPrice": 199.99,
-    "FinalPrice": 199.99
+    "FinalPrice": 199.99,
+    "pageUrl": "../product_pages/marmot-ajax-3.html"
   },
   {
     "Id": "985RF",
