@@ -1,6 +1,13 @@
-// console.log(window.location.search)
+import ProductData from "./ProductData.mjs";
+import ProductList from "./ProductList.mjs";
+import { renderListWithTemplate } from "./utils.mjs";
+import { productCardTemplate } from "./product-card-temp.mjs";
 
-// const a = new URLSearchParams(window.location.search)
+const productData = new ProductData("tents");
+const productList = new ProductList("tents", productData, document.querySelector(".product-list"));
 
-// console.log(a.get('pio'))
+renderListWithTemplate(productCardTemplate, document.querySelector(".product-list"), await productList.init(), "beforeend", true);
+
+
+console.log(await productList.init());
 
