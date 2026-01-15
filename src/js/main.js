@@ -15,9 +15,13 @@ import { productCardTemplate } from "./product-card-temp.mjs";
 const productData = new ProductData("tents");
 const productList = new ProductList("tents", productData, document.querySelector(".product-list"));
 
-renderListWithTemplate(productCardTemplate, document.querySelector(".product-list"), await productList.init(), "beforeend", true);
+productList.init().then(products => {
+  renderListWithTemplate(productCardTemplate, document.querySelector(".product-list"), products, "beforeend", true);
+})
 
 
-console.log(await productList.init());
+
+
+
 
 
