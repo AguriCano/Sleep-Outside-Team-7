@@ -22,6 +22,7 @@ export function setClick(selector, callback) {
   qs(selector).addEventListener("click", callback);
 }
 
+
 // get query string parameters
 
 export const getParams = (params) => {
@@ -31,4 +32,12 @@ export const getParams = (params) => {
   const product = urlParams.get("product");
 
   return product;
+}
+
+// render a list of items using a template function
+export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+  const htmlStrings = list.map(templateFn);
+  if (clear) parentElement.innerHTML = "";
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+
 }
