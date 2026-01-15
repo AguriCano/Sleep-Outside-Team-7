@@ -4,13 +4,20 @@ import { renderListWithTemplate } from "./utils.mjs";
 import { productCardTemplate } from "./product-card-temp.mjs";
 
 
-// Initialize data source and product list
+// // Initialize data source and product list
+// const productData = new ProductData("tents");
+// // Product list instance
+// const productList = new ProductList("tents", productData, document.querySelector(".product-list"));
+// // Render product list
+// renderListWithTemplate(productCardTemplate, document.querySelector(".product-list"), await productList.init(), "beforeend", true);
+
+
 const productData = new ProductData("tents");
-// Product list instance
 const productList = new ProductList("tents", productData, document.querySelector(".product-list"));
-// Render product list
+
 renderListWithTemplate(productCardTemplate, document.querySelector(".product-list"), await productList.init(), "beforeend", true);
 
 
+console.log(await productList.init());
 
 
