@@ -23,6 +23,12 @@ export function setClick(selector, callback) {
 }
 
 // get query string parameters
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-const product = urlParams.get('product')
+
+export const getParams = (params) => {
+
+  const queryString = params;
+  const urlParams = new URLSearchParams(queryString);
+  const product = urlParams.get("product");
+
+  return product;
+}
