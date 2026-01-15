@@ -51,6 +51,5 @@ export default class ProductDetails {
 
     node.appendChild(clone);
   }
-
 }
 
