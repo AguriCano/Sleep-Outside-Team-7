@@ -12,4 +12,5 @@ const productList = new ProductList("tents", productData, document.querySelector
 renderListWithTemplate(productCardTemplate, document.querySelector(".product-list"), await productList.init(), "beforeend", true);
 
 
-console.log(await productList.init());
+
+
