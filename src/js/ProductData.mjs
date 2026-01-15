@@ -13,9 +13,9 @@ export default class ProductData {
     this.path = `../json/${this.category}.json`;
   }
 
-  async getData() {
+  getData() {
 
-    return await fetch(this.path)
+    return fetch(this.path)
       .then(convertToJson)
       .then((data) => data);
   }
