@@ -241,6 +241,15 @@ button {
   grid-column: 3;
 }
 
+.cart-card__id {
+  grid-column: 3;
+  text-align: end;
+}
+
+.remove-product {
+  cursor: pointer;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
