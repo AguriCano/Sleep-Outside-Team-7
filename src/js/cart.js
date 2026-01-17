@@ -1,16 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
-
-// Function to update cart counter
-function updateCartCounter() {
-  const cartItems = getLocalStorage("so-cart") || [];
-  const cartCount = cartItems.length;
-  const cartCountElement = document.getElementById("cart-count");
-  
-  if (cartCountElement) {
-    cartCountElement.textContent = cartCount;
-    cartCountElement.style.display = cartCount > 0 ? "flex" : "none";
-  }
-}
+import { getLocalStorage, setLocalStorage, updateCartCounter } from "./utils.mjs";
 
 // Initialize cart counter on page load
 updateCartCounter();
@@ -91,6 +79,6 @@ function removeFromCart(productId) {
   }
 
   renderCartContents();
-
+  updateCartCounter(); // Update cart counter after removing items
 }
 renderCartContents();
