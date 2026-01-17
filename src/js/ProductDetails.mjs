@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, updateCartCounter } from "./utils.mjs";
 export default class ProductDetails {
 
   constructor(productId, dataSource) {
@@ -28,6 +28,7 @@ export default class ProductDetails {
     const cartItems = getLocalStorage("so-cart") || []; // get cart array of items from local storage if null set to empty array
     cartItems.push(producto);
     setLocalStorage("so-cart", cartItems);
+    updateCartCounter(); // Update cart counter immediately
   }
 
   async addToCartHandler(e) {
