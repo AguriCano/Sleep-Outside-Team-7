@@ -1,10 +1,24 @@
 import { getLocalStorage } from "./utils.mjs";
 
+// Function to update cart counter
+function updateCartCounter() {
+  const cartItems = getLocalStorage("so-cart") || [];
+  const cartCount = cartItems.length;
+  const cartCountElement = document.getElementById("cart-count");
+  
+  if (cartCountElement) {
+    cartCountElement.textContent = cartCount;
+    cartCountElement.style.display = cartCount > 0 ? "flex" : "none";
+  }
+}
+
+// Initialize cart counter on page load
+updateCartCounter();
+
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
-
 }
 
 function cartItemTemplate(item) {
