@@ -123,6 +123,18 @@ button {
   text-align: center;
 }
 
+.cart-footer {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.hide {
+  display: none;
+}
+
 .cart svg {
   width: 25px;
 }
@@ -255,6 +267,15 @@ button {
 .cart-card__price {
   grid-row: 2;
   grid-column: 3;
+}
+
+.cart-card__id {
+  grid-column: 3;
+  text-align: end;
+}
+
+.remove-product {
+  cursor: pointer;
 }
 
 @media screen and (min-width: 500px) {
