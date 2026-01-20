@@ -298,3 +298,32 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+
+#alertHolder {
+  position: fixed;
+  gap: 10px;
+  display: flex; 
+  flex-direction: column;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
+  font-weight: bold;
+}
+
+#alertHolder section {
+  border-radius: 20px;
+  padding: 2px 20px;
+  position: relative;
+  left: 500px;
+  animation: slideLeft 0.5s ease-in-out forwards;
+}
+
+@keyframes slideLeft {
+  from {
+    left: 500px;
+  }
+  to{
+    left: 0;
+  }
+}
