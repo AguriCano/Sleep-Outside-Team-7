@@ -1,10 +1,9 @@
-import { getParams, updateCartCounter } from "./utils.mjs";
+import { getParams, updateCartCounter, loadHeaderFooter } from "./utils.mjs";
 import ProductData from "./ProductData.mjs";
 import ProductDetails from "./ProductDetails.mjs";
-import loadHeaderFooter from "./utils.mjs";
 
 // Load header and footer
-//loadHeaderFooter();
+loadHeaderFooter();
 
 // Initialize cart counter on page load
 updateCartCounter();
@@ -15,4 +14,3 @@ const productDetails = new ProductDetails(productId, dataSource);
 productDetails.init();
 
 // add listener to Add to Cart button
-

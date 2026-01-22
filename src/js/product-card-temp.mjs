@@ -1,3 +1,4 @@
+// Generate HTML for a product card
 export function productCardTemplate(product) {
   return `<li class="product-card">
     <a href="product_pages/?product=${product.Id}">

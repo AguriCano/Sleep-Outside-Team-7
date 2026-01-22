@@ -9,10 +9,12 @@ export function qs(selector, parent = document) {
 export function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
 }
+
 // save data to local storage
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
+
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
   qs(selector).addEventListener("touchend", (event) => {
@@ -35,7 +37,6 @@ export function updateCartCounter() {
 }
 
 // get query string parameters
-
 export const getParams = (params) => {
   const queryString = params;
   const urlParams = new URLSearchParams(queryString);
@@ -57,6 +58,7 @@ export function renderListWithTemplate(
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
 
+// render a single template into a parent element, with optional callback
 export function renderWithTemplate(template, parentElement, data, callback) {
   parentElement.innerHTML = template;
   if (callback) {
@@ -64,6 +66,7 @@ export function renderWithTemplate(template, parentElement, data, callback) {
   }
 }
 
+// Load an HTML template from a given path
 export async function loadTemplate(path) {
   const res = await fetch(path);
   const template = await res.text();
@@ -72,12 +75,12 @@ export async function loadTemplate(path) {
 
 // Load header and footer templates and insert them into the document
 export async function loadHeaderFooter() {
-  // Header
+  // Generate Header
   const headerTemplate = await loadTemplate("../partials/header.html");
   const headerElement = document.querySelector("#main-header");
   renderWithTemplate(headerTemplate, headerElement);
 
-  // Footer
+  // Generate Footer
   const footerTemplate = await loadTemplate("../partials/footer.html");
   const footerElement = document.querySelector("#main-footer");
   renderWithTemplate(footerTemplate, footerElement);
