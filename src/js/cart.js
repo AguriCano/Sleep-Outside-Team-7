@@ -1,4 +1,9 @@
-import { getLocalStorage, setLocalStorage, updateCartCounter, loadHeaderFooter } from "./utils.mjs";
+import {
+  getLocalStorage,
+  setLocalStorage,
+  updateCartCounter,
+  loadHeaderFooter,
+} from "./utils.mjs";
 
 // Load header and footer
 loadHeaderFooter();
@@ -28,9 +33,7 @@ function renderCartTotal(cartItems) {
   }
 
   // calculate total
-  const total = cartItems.reduce((sum, item) => {
-    return sum + item.FinalPrice;
-  }, 0);
+  const total = cartItems.reduce((sum, item) => sum + item.FinalPrice, 0);
 
   // display total
   cartTotal.textContent = `Total: $${total.toFixed(2)}`;
@@ -59,26 +62,25 @@ function cartItemTemplate(item) {
 
 document.addEventListener("click", (event) => {
   if (event.target.matches(".remove-product")) {
-    removeFromCart(event.target.dataset.id)
+    removeFromCart(event.target.dataset.id);
   }
-})
-
+});
 
 function removeFromCart(productId) {
-  console.log("product id :", productId)
-  const cartItems = getLocalStorage("so-cart")
-  if(!cartItems || !cartItems.length) return;
+  console.log("product id :", productId);
+  const cartItems = getLocalStorage("so-cart");
+  if (!cartItems || !cartItems.length) return;
 
-  const index = cartItems.findIndex(product => product.Id === productId)
-  
-  if(index !== -1){
-    cartItems.splice(index, 1)
-  } 
+  const index = cartItems.findIndex((product) => product.Id === productId);
 
-  if(cartItems.length === 0){
-    localStorage.removeItem("so-cart")
+  if (index !== -1) {
+    cartItems.splice(index, 1);
+  }
+
+  if (cartItems.length === 0) {
+    localStorage.removeItem("so-cart");
   } else {
-    setLocalStorage("so-cart", cartItems)
+    setLocalStorage("so-cart", cartItems);
   }
 
   renderCartContents();

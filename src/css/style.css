@@ -299,11 +299,10 @@ footer {
   padding: 1em;
 }
 
-
 #alertHolder {
   position: fixed;
   gap: 10px;
-  display: flex; 
+  display: flex;
   flex-direction: column;
   bottom: 20px;
   right: 20px;
@@ -323,7 +322,7 @@ footer {
   from {
     left: 500px;
   }
-  to{
+  to {
     left: 0;
   }
 }
