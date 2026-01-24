@@ -25,11 +25,26 @@ export default class ProductDetails {
   }
 
   addProductToCart(producto) {
-    const cartItems = getLocalStorage("so-cart") || []; // get cart array of items from local storage if null set to empty array
+  const cartItems = getLocalStorage("so-cart") || [];
+
+  // check if product already exists in cart
+  const existingProduct = cartItems.find(
+    (item) => item.Id === producto.Id
+  );
+
+  if (existingProduct) {
+    // increment quantity if already in cart
+    existingProduct.quantity += 1;
+  } else {
+    // add new product with quantity 1
+    producto.quantity = 1;
     cartItems.push(producto);
-    setLocalStorage("so-cart", cartItems);
-    updateCartCounter(); // Update cart counter immediately
   }
+
+  setLocalStorage("so-cart", cartItems);
+  updateCartCounter();
+}
+
 
   async addToCartHandler(e) {
     const product = await this.dataSource.findProductById(e.target.dataset.id);
