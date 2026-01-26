@@ -14,10 +14,15 @@ export default class ProductData {
   }
 
   getData() {
-
     return fetch(this.path)
       .then(convertToJson)
-      .then((data) => data);
+      .then((data) => {
+        // Handle different JSON structures
+        if (data.Result && Array.isArray(data.Result)) {
+          return data.Result;
+        }
+        return Array.isArray(data) ? data : [];
+      });
   }
 
   async findProductById(id) {

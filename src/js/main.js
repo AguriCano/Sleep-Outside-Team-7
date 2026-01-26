@@ -13,19 +13,14 @@ loadHeaderFooter().then(() => {
 // Create product data instance for tents
 const productData = new ProductData("tents");
 
-// Create and initialize product list
-const productList = new ProductList(
-  "tents",
-  productData,
-  document.querySelector(".product-list"),
-);
-
 // Fetch and render products
-productList.init().then((products) => {
+productData.getData().then((products) => {
+  // Take first 4 products from tents for Top Products
+  const topProducts = products.slice(0, 4);
   renderListWithTemplate(
     productCardTemplate,
     document.querySelector(".product-list"),
-    products,
+    topProducts,
     "beforeend",
     true,
   );
