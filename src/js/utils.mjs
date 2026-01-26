@@ -27,7 +27,7 @@ export function setClick(selector, callback) {
 // Function to update cart counter
 export function updateCartCounter() {
   const cartItems = getLocalStorage("so-cart") || [];
-  const cartCount = cartItems.length;
+  const cartCount = cartItems.reduce((total, item) => total + (item.quantity || 1), 0);
   const cartCountElement = document.getElementById("cart-count");
 
   if (cartCountElement) {

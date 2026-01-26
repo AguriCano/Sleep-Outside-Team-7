@@ -5,11 +5,10 @@ import { renderListWithTemplate, updateCartCounter } from "./utils.mjs";
 import { productCardTemplate } from "./product-card-temp.mjs";
 import Alert from "./Alert.js";
 
-// Load header and footer
-loadHeaderFooter();
-
-// Initialize cart counter on page load
-updateCartCounter();
+// Load header and footer, then update cart counter
+loadHeaderFooter().then(() => {
+  updateCartCounter();
+});
 
 // Create product data instance for tents
 const productData = new ProductData("tents");

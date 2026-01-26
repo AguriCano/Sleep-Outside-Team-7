@@ -5,11 +5,11 @@ import {
   loadHeaderFooter,
 } from "./utils.mjs";
 
-// Load header and footer
-loadHeaderFooter();
-
-// Initialize cart counter on page load
-updateCartCounter();
+// Load header and footer, then update cart counter and render cart
+loadHeaderFooter().then(() => {
+  updateCartCounter();
+  renderCartContents();
+});
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
@@ -86,4 +86,3 @@ function removeFromCart(productId) {
   renderCartContents();
   updateCartCounter(); // Update cart counter after removing items
 }
-renderCartContents();
