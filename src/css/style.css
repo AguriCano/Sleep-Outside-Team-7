@@ -264,6 +264,14 @@ button {
   grid-column: 3;
 }
 
+.quantity-input {
+  width: 60px;
+  padding: 2px 4px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  text-align: center;
+}
+
 .cart-card__price {
   grid-row: 2;
   grid-column: 3;
