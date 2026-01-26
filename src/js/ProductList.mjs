@@ -16,23 +16,18 @@ function productCardTemplate(product) {
 
 // Product list class
 export default class ProductList {
-
-  // Constructor
   constructor(category, dataSource, element) {
     this.category = category;
     this.dataSource = dataSource;
-    this.element = element;
+    this.listElement = element;
   }
 
-  // Initialize product list
   async init() {
-    const ls = await this.dataSource.getData();
-    return ls;
+    const list = await this.dataSource.getData();
+    this.renderList(list);
   }
 
-  // Render list of products
   renderList(list) {
     renderListWithTemplate(productCardTemplate, this.listElement, list);
   }
-
 }

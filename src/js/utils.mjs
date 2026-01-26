@@ -40,10 +40,15 @@ export function updateCartCounter() {
 export const getParams = (params) => {
   const queryString = params;
   const urlParams = new URLSearchParams(queryString);
-  const product = urlParams.get("product");
-
-  return product;
+  // Check both 'product' and 'products' parameters
+  return urlParams.get("product") || urlParams.get("products");
 };
+
+// get a single parameter from URL
+export function getParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
 
 // render a list of items using a template function
 export function renderListWithTemplate(
