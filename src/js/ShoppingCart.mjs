@@ -10,7 +10,9 @@ function cartItemTemplate(item) {
       <h2 class="card__name">${item.Name}</h2>
     </a>
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-    <p class="cart-card__quantity">qty: ${item.quantity}</p>
+    <p class="cart-card__quantity">
+      qty: <input type="number" class="quantity-input" data-id="${item.Id}" value="${item.quantity}" min="1">
+    </p>
     <p class="cart-card__id">
       <span class="remove-product" data-id="${item.Id}">X</span>
     </p>
@@ -52,6 +54,18 @@ export default class ShoppingCart {
     cartFooter.classList.remove("hide");
   }
 
+  updateQuantity(productId, newQuantity) {
+    const cartItems = this.getCartItems();
+    const item = cartItems.find(product => product.Id === productId);
+    
+    if (item && newQuantity > 0) {
+      item.quantity = parseInt(newQuantity);
+      setLocalStorage("so-cart", cartItems);
+      this.renderCartContents();
+      updateCartCounter();
+    }
+  }
+
   removeFromCart(productId) {
     const cartItems = this.getCartItems();
     if (!cartItems || !cartItems.length) return;
@@ -76,6 +90,12 @@ export default class ShoppingCart {
     document.addEventListener("click", (event) => {
       if (event.target.matches(".remove-product")) {
         this.removeFromCart(event.target.dataset.id);
+      }
+    });
+
+    document.addEventListener("change", (event) => {
+      if (event.target.matches(".quantity-input")) {
+        this.updateQuantity(event.target.dataset.id, event.target.value);
       }
     });
   }
