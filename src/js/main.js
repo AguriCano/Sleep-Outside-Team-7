@@ -1,5 +1,5 @@
 import { loadHeaderFooter } from "./utils.mjs";
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductList from "./ProductList.mjs";
 import { renderListWithTemplate, updateCartCounter } from "./utils.mjs";
 import { productCardTemplate } from "./product-card-temp.mjs";
@@ -11,10 +11,10 @@ loadHeaderFooter().then(() => {
 });
 
 // Create product data instance for tents
-const productData = new ProductData("tents");
+const ExternalServices2 = new ExternalServices("tents");
 
 // Fetch and render products
-productData.getData().then((products) => {
+ExternalServices2.getData().then((products) => {
   // Take first 4 products from tents for Top Products
   const topProducts = products.slice(0, 4);
   renderListWithTemplate(
