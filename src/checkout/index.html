@@ -4,12 +4,12 @@
   <head>
     <meta charset="UTF-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Sleep Outside | Checkout</title>
 
-    <link rel="stylesheet" href="css/style.css" />
-    <script src="../js/checkout.js" type="module"></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/checkout.js" type="module"></script>
   </head>
 
   <body>
@@ -18,9 +18,55 @@
     <main class="divider">
       <section class="products">
         <h2>Review & Place your Order</h2>
+        <ul class="product-list"></ul>
+
+          <p class="cart-total"></p>
+
+      </section>
+      
+      <section class="checkout-form">
+        <h2>Checkout</h2>
+        <form id="checkout">
+          <fieldset>
+            <legend>Customer Information</legend>
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="fname" required>
+            
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname" required>
+          </fieldset>
+          
+          <fieldset>
+            <legend>Address</legend>
+            <label for="street">Street Address</label>
+            <input type="text" id="street" name="street" required>
+            
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" required>
+            
+            <label for="state">State</label>
+            <input type="text" id="state" name="state" required>
+            
+            <label for="zip">Zip Code</label>
+            <input type="text" id="zip" name="zip" required>
+          </fieldset>
+          
+          <fieldset>
+            <legend>Payment</legend>
+            <label for="cardNumber">Credit Card Number</label>
+            <input type="text" id="cardNumber" name="cardNumber" required>
+            
+            <label for="expiration">Expiration Date</label>
+            <input type="text" id="expiration" name="expiration" placeholder="MM/YY" required>
+            
+            <label for="code">Security Code</label>
+            <input type="text" id="code" name="code" required>
+          </fieldset>
+          
+          <button type="submit">Checkout</button>
+        </form>
       </section>
     </main>
-
     <footer id="main-footer"></footer>
   </body>
 </html>
