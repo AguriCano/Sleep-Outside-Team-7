@@ -11,10 +11,10 @@ loadHeaderFooter().then(() => {
 });
 
 // Create product data instance for tents
-const ExternalServices2 = new ExternalServices("tents");
+const externalServices = new ExternalServices("tents");
 
 // Fetch and render products
-ExternalServices2.getData().then((products) => {
+externalServices.getData().then((products) => {
   // Take first 4 products from tents for Top Products
   const topProducts = products.slice(0, 4);
   renderListWithTemplate(
@@ -31,4 +31,6 @@ const a = new Alert(
   document.getElementById("atemp"),
   document.getElementById("alertHolder"),
 );
+
+// Generate the alert
 a.generateAlert();
