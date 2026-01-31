@@ -2,9 +2,10 @@ import { getLocalStorage, setLocalStorage, updateCartCounter } from "./utils.mjs
 
 // Template for cart item
 function cartItemTemplate(item) {
+  const image = item.Image || "/images/missing-image.svg";
   return `<li class="cart-card divider">
     <a href="#" class="cart-card__image">
-      <img src="${item.Image}" alt="${item.Name}" />
+      <img src="${image}" alt="${item.Name}" />
     </a>
     <a href="#">
       <h2 class="card__name">${item.Name}</h2>

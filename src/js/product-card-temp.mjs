@@ -1,6 +1,12 @@
 // Generate HTML for a product card
 export function productCardTemplate(product) {
-  const imageUrl = product.Image || product.Images?.PrimaryLarge || '';
+  const imageUrl =
+    product.Image ||
+    product.Images?.PrimaryLarge ||
+    product.Images?.PrimaryMedium ||
+    product.Images?.PrimarySmall ||
+    "/images/missing-image.svg";
+
   return `<li class="product-card">
     <a href="product_pages/?product=${product.Id}">
       <img src="${imageUrl}" alt="Image of ${product.Name}">
@@ -8,5 +14,5 @@ export function productCardTemplate(product) {
       <h3 class="card__name">${product.Name}</h3>
       <p class="product-card__price">$${product.ListPrice}</p>
     </a>
-  </li>`
+  </li>`;
 }
