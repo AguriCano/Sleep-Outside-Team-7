@@ -36,6 +36,33 @@ header {
   padding: 0.5rem;
 }
 
+.site-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  max-width: 420px;
+  margin: 0 1rem;
+}
+
+.site-search input {
+  flex: 1;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.site-search input:focus {
+  outline: 2px solid var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.site-search .btn {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.95rem;
+}
+
 p {
   padding: 0.75rem;
 }
@@ -486,6 +513,14 @@ footer {
 .checkout button.btn {
   margin-top: 0.5rem;
   width: 100%;
+}
+
+/* Search results */
+.no-results {
+  padding: 1rem;
+  text-align: center;
+  color: var(--tertiary-color);
+  font-weight: 600;
 }
 
 @media screen and (min-width: 760px) {
