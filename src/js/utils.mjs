@@ -9,10 +9,12 @@ export function qs(selector, parent = document) {
 export function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
 }
+
 // save data to local storage
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
+
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
   qs(selector).addEventListener("touchend", (event) => {
@@ -25,9 +27,9 @@ export function setClick(selector, callback) {
 // Function to update cart counter
 export function updateCartCounter() {
   const cartItems = getLocalStorage("so-cart") || [];
-  const cartCount = cartItems.length;
+  const cartCount = cartItems.reduce((total, item) => total + (item.quantity || 1), 0);
   const cartCountElement = document.getElementById("cart-count");
-  
+
   if (cartCountElement) {
     cartCountElement.textContent = cartCount;
     cartCountElement.style.display = cartCount > 0 ? "flex" : "none";
@@ -35,20 +37,56 @@ export function updateCartCounter() {
 }
 
 // get query string parameters
-
 export const getParams = (params) => {
-
   const queryString = params;
   const urlParams = new URLSearchParams(queryString);
-  const product = urlParams.get("product");
+  // Check both 'product' and 'products' parameters
+  return urlParams.get("product") || urlParams.get("products");
+};
 
-  return product;
+// get a single parameter from URL
+export function getParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
 }
 
 // render a list of items using a template function
-export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+export function renderListWithTemplate(
+  templateFn,
+  parentElement,
+  list,
+  position = "afterbegin",
+  clear = false,
+) {
   const htmlStrings = list.map(templateFn);
   if (clear) parentElement.innerHTML = "";
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+}
 
+// render a single template into a parent element, with optional callback
+export function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.innerHTML = template;
+  if (callback) {
+    callback(data);
+  }
+}
+
+// Load an HTML template from a given path
+export async function loadTemplate(path) {
+  const res = await fetch(path);
+  const template = await res.text();
+  return template;
+}
+
+// Load header and footer templates and insert them into the document
+export async function loadHeaderFooter() {
+  // Generate Header
+  const headerTemplate = await loadTemplate("../partials/header.html");
+  const headerElement = document.querySelector("#main-header");
+  renderWithTemplate(headerTemplate, headerElement);
+
+  // Generate Footer
+  const footerTemplate = await loadTemplate("../partials/footer.html");
+  const footerElement = document.querySelector("#main-footer");
+  renderWithTemplate(footerTemplate, footerElement);
 }

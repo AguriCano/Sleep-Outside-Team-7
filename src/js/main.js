@@ -1,28 +1,36 @@
-import ProductData from "./ProductData.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductList from "./ProductList.mjs";
 import { renderListWithTemplate, updateCartCounter } from "./utils.mjs";
 import { productCardTemplate } from "./product-card-temp.mjs";
 import Alert from "./Alert.js";
-// Initialize cart counter on page load
-updateCartCounter();
 
-const productData = new ProductData("tents");
-const productList = new ProductList("tents", productData, document.querySelector(".product-list"));
+// Load header and footer, then update cart counter
+loadHeaderFooter().then(() => {
+  updateCartCounter();
+});
 
-productList.init().then(products => {
-  renderListWithTemplate(productCardTemplate, document.querySelector(".product-list"), products, "beforeend", true);
-})
+// Create product data instance for tents
+const externalServices = new ExternalServices("tents");
 
-const a = new Alert(document.getElementById("atemp"), document.getElementById("alertHolder"))
+// Fetch and render products
+externalServices.getData().then((products) => {
+  // Take first 4 products from tents for Top Products
+  const topProducts = products.slice(0, 4);
+  renderListWithTemplate(
+    productCardTemplate,
+    document.querySelector(".product-list"),
+    topProducts,
+    "beforeend",
+    true,
+  );
+});
 
-a.generateAlert()
+// Create and generate alert
+const a = new Alert(
+  document.getElementById("atemp"),
+  document.getElementById("alertHolder"),
+);
 
-
-
-
-
-
-
-
-
-
+// Generate the alert
+a.generateAlert();
