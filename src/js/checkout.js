@@ -7,11 +7,8 @@ loadHeaderFooter().then(() => {
   const checkout = new CheckoutProcess("so-cart", ".checkout-summary");
   checkout.init();
 
-  const form = document.forms["checkout"];
+  const form = document.getElementById("myform");
   if (form) {
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      checkout.checkout(form);
-    });
+    checkout.addSubmitHandler(form);
   }
 });

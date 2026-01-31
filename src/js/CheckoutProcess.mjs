@@ -19,47 +19,55 @@ export default class CheckoutProcess {
   constructor(key, outputSelector) {
     this.key = key;
     this.outputSelector = outputSelector;
-    this.list = getLocalStorage(this.key) || [];
+    this.list = [];
+    this.itemTotal = 0;
+    this.orderTotal = 0;
   }
 
   init() {
-    this.renderOrderSummary();
-    this.attachValidation();
+    this.list = getLocalStorage(this.key) || [];
+    this.renderItemList();
+    this.calculateItemSummary();
+    this.setTaxZipListener();
   }
 
-  attachValidation() {
-    const zip = document.querySelector("#zip");
-    const state = document.querySelector("#state");
-    if (zip) {
-      zip.addEventListener("change", () => this.checkZip());
-    }
-    if (state) {
-      state.addEventListener("change", () => this.checkState());
-    }
-  }
-
-  renderOrderSummary() {
+  renderItemList() {
     const parentElement = document.querySelector(this.outputSelector);
     if (!parentElement) return;
-
     const htmlItems = this.list.map((item) => cartItemTemplate(item));
     parentElement.innerHTML = htmlItems.join("");
-    this.renderTotals();
   }
 
-  renderTotals() {
-    const subtotal = this.list.reduce(
+  calculateItemSummary() {
+    this.itemTotal = this.list.reduce(
       (sum, item) => sum + item.FinalPrice * (item.quantity || 1),
       0,
     );
-    const shipping = subtotal > 0 ? 10 : 0;
-    const tax = subtotal * 0.06;
-    const orderTotal = subtotal + shipping + tax;
+    const shipping = this.calculateShipping();
+    const tax = this.calculateTax(this.itemTotal);
+    this.orderTotal = this.itemTotal + shipping + tax;
 
-    this.updateDisplay("#subtotal", subtotal);
-    this.updateDisplay("#shipping", shipping);
-    this.updateDisplay("#tax", tax);
-    this.updateDisplay("#order-total", orderTotal);
+    this.updateTotalsDisplay({
+      subtotal: this.itemTotal,
+      shipping,
+      tax,
+      orderTotal: this.orderTotal,
+    });
+  }
+
+  calculateShipping() {
+    return this.itemTotal > 0 ? 10 : 0;
+  }
+
+  calculateTax(subtotal) {
+    return subtotal * 0.06;
+  }
+
+  updateTotalsDisplay(totals) {
+    this.updateDisplay("#subtotal", totals.subtotal);
+    this.updateDisplay("#shipping", totals.shipping);
+    this.updateDisplay("#tax", totals.tax);
+    this.updateDisplay("#order-total", totals.orderTotal);
   }
 
   updateDisplay(selector, value) {
@@ -67,10 +75,52 @@ export default class CheckoutProcess {
     if (target) target.textContent = `$${value.toFixed(2)}`;
   }
 
+  setTaxZipListener() {
+    const zip = document.querySelector("#zip");
+    if (!zip) return;
+    zip.addEventListener("change", () => {
+      this.checkZip();
+      this.calculateItemSummary();
+    });
+  }
+
+  addSubmitHandler(form) {
+    const errorBox = document.querySelector(".checkout-error");
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const zipValid = this.checkZip();
+      const stateValid = this.checkState();
+      const formValues = this.serializeForm(form);
+      const hasAllValues = Object.values(formValues).every(
+        (value) => value && value.trim().length,
+      );
+
+      if (!zipValid || !stateValid || !hasAllValues) {
+        if (errorBox) errorBox.classList.remove("hide");
+        return;
+      }
+
+      if (errorBox) errorBox.classList.add("hide");
+      console.log("Order details", formValues);
+
+      localStorage.removeItem(this.key);
+      updateCartCounter();
+      this.list = [];
+      this.renderItemList();
+      this.calculateItemSummary();
+      form.reset();
+    });
+  }
+
+  serializeForm(form) {
+    const formData = new FormData(form);
+    return Object.fromEntries(formData.entries());
+  }
+
   checkZip() {
     const zipInput = document.querySelector("#zip");
     if (!zipInput) return false;
-    const isValid = /^\d{5}$/.test(zipInput.value.trim());
+    const isValid = /^\\d{5}$/.test(zipInput.value.trim());
     this.toggleFieldError(zipInput, isValid);
     return isValid;
   }
@@ -88,35 +138,5 @@ export default class CheckoutProcess {
     if (message) {
       message.classList.toggle("hide", isValid);
     }
-  }
-
-  checkout(form) {
-    const formElement = form || document.forms["checkout"];
-    if (!formElement) return;
-
-    const zipOk = this.checkZip();
-    const stateOk = this.checkState();
-
-    const formData = new FormData(formElement);
-    const entries = Object.fromEntries(formData.entries());
-    const hasAllValues = Object.values(entries).every((value) => value && value.trim().length);
-
-    const allGood = zipOk && stateOk && hasAllValues;
-    const errorBox = document.querySelector(".checkout-error");
-    if (!allGood) {
-      if (errorBox) errorBox.classList.remove("hide");
-      return;
-    }
-
-    if (errorBox) errorBox.classList.add("hide");
-
-    console.log("Order details", entries);
-
-    // Clear cart and update UI
-    localStorage.removeItem(this.key);
-    updateCartCounter();
-    this.list = [];
-    this.renderOrderSummary();
-    formElement.reset();
   }
 }
