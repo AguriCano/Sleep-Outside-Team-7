@@ -1,5 +1,5 @@
 import { getParams, updateCartCounter, loadHeaderFooter } from "./utils.mjs";
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductDetails from "./ProductDetails.mjs";
 
 // Load header and footer, then update cart counter
@@ -14,7 +14,7 @@ async function findProductInCategories(productId) {
   const categories = ["tents", "sleeping-bags", "backpacks"];
   
   for (const category of categories) {
-    const dataSource = new ProductData(category);
+    const dataSource = new ExternalServices(category);
     try {
       const product = await dataSource.findProductById(productId);
       if (product) {

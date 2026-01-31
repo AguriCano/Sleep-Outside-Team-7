@@ -1,23 +1,65 @@
 <!doctype html>
-
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Sleep Outside | Checkout</title>
-
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <script src="../js/checkout.js" type="module"></script>
   </head>
-
   <body>
     <header id="main-header" class="divider"></header>
 
-    <main class="divider">
+    <main class="divider checkout">
       <section class="products">
-        <h2>Review & Place your Order</h2>
+        <h2>Review &amp; Place your Order</h2>
+        <ul class="product-list checkout-summary"></ul>
+        <div class="cart-footer">
+          <p><span>Item Subtotal</span> <span id="subtotal">$0.00</span></p>
+          <p><span>Shipping Estimate</span> <span id="shipping">$0.00</span></p>
+          <p><span>Tax</span> <span id="tax">$0.00</span></p>
+          <p class="divider"><span>Order Total</span> <span id="order-total">$0.00</span></p>
+        </div>
+      </section>
+
+      <section class="shipping">
+        <h2>Checkout</h2>
+        <p class="checkout-error hide">Please fix the errors highlighted below.</p>
+        <form id="myform" name="checkout" class="checkout-form">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="firstName" required />
+
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="lastName" required />
+
+          <label for="address">Address</label>
+          <input type="text" id="address" name="address" required />
+
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" required />
+
+          <label for="state">State</label>
+          <input type="text" id="state" name="state" maxlength="2" required />
+          <span class="field-error hide">State should be 2 characters.</span>
+
+          <label for="zip">Zip</label>
+          <input type="text" id="zip" name="zip" maxlength="5" required />
+          <span class="field-error hide">Zip should be 5 numbers.</span>
+
+          <label for="cardName">Name on Card</label>
+          <input type="text" id="cardName" name="cardName" required />
+
+          <label for="cardNumber">Card Number</label>
+          <input type="text" id="cardNumber" name="cardNumber" required />
+
+          <label for="expDate">Expiration</label>
+          <input type="text" id="expDate" name="expDate" placeholder="MM/YY" required />
+
+          <label for="securityCode">Security Code</label>
+          <input type="text" id="securityCode" name="securityCode" required />
+
+          <button type="submit" id="checkoutSubmit" class="btn primary">Place Order</button>
+        </form>
       </section>
     </main>
 
