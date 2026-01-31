@@ -59,7 +59,8 @@ export default class ProductDetails {
 
     title.textContent = producto.Brand.Name;
     subTitle.textContent = producto.NameWithoutBrand;
-    image.src = producto.Image;
+    image.src = producto.Image || "/images/missing-image.svg";
+    image.alt = `Image of ${producto.Name}`;
     price.textContent = `$ ${producto.ListPrice}`;
     color.textContent = producto.Colors[0].ColorName;
     desc.innerHTML = producto.DescriptionHtmlSimple;
@@ -68,4 +69,3 @@ export default class ProductDetails {
     node.appendChild(clone);
   }
 }
-
