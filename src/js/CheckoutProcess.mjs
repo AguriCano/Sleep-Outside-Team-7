@@ -120,7 +120,7 @@ export default class CheckoutProcess {
   checkZip() {
     const zipInput = document.querySelector("#zip");
     if (!zipInput) return false;
-    const isValid = /^\\d{5}$/.test(zipInput.value.trim());
+    const isValid = /^\d{5}$/.test(zipInput.value.trim());
     this.toggleFieldError(zipInput, isValid);
     return isValid;
   }
