@@ -10,7 +10,8 @@ function convertToJson(res) {
 export default class ExternalServices {
   constructor(category) {
     this.category = category;
-    this.path = `../json/${this.category}.json`;
+    // use absolute path so it works from any page depth (/, /cart, /product_listing, /checkout)
+    this.path = `/json/${this.category}.json`;
   }
 
   getData() {
