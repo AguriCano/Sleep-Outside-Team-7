@@ -131,6 +131,17 @@ button {
   font-weight: bold;
 }
 
+.checkout-link {
+  display: block;
+  margin-top: 0.75rem;
+  text-align: center;
+  text-decoration: none;
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 0.65rem 1rem;
+  border-radius: 4px;
+}
+
 .hide {
   display: none;
 }
