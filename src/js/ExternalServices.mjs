@@ -10,7 +10,9 @@ function convertToJson(res) {
 export default class ExternalServices {
   constructor(category) {
     this.category = category;
-    this.path = `../json/${this.category}.json`;
+    
+    // Define the path based on category
+    this.path = `/json/${this.category}.json`;
   }
 
   getData() {

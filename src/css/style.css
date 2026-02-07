@@ -36,6 +36,33 @@ header {
   padding: 0.5rem;
 }
 
+.site-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  max-width: 420px;
+  margin: 0 1rem;
+}
+
+.site-search input {
+  flex: 1;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.site-search input:focus {
+  outline: 2px solid var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.site-search .btn {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.95rem;
+}
+
 p {
   padding: 0.75rem;
 }
@@ -488,6 +515,14 @@ footer {
   width: 100%;
 }
 
+/* Search results */
+.no-results {
+  padding: 1rem;
+  text-align: center;
+  color: var(--tertiary-color);
+  font-weight: 600;
+}
+
 @media screen and (min-width: 760px) {
   .checkout {
     grid-template-columns: 1.4fr 1fr;
@@ -497,4 +532,60 @@ footer {
   .checkout .cart-card {
     grid-template-columns: 100px 1fr 80px;
   }
+}
+
+/* Refined Newsletter Section */
+.newsletter {
+  background-color: var(--light-grey);
+  padding: 4rem 1rem;
+  text-align: center;
+  /* Matches your header/footer dividers */
+  border-top: 2px solid var(--primary-color);
+}
+
+.newsletter-content h3 {
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--dark-grey);
+}
+
+.newsletter-content p {
+  margin-bottom: 1.5rem;
+  color: var(--dark-grey);
+  padding: 0;
+  /* Overriding your general p padding for this box */
+}
+
+#newsletter-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+#newsletter-email {
+  padding: 0.8rem;
+  flex: 1;
+  min-width: 250px;
+  border: 1px solid var(--dark-grey);
+  border-radius: 4px;
+  font-family: var(--font-body);
+}
+
+/* Using your existing brand colors */
+#newsletter-btn {
+  background-color: var(--secondary-color);
+  margin: 0;
+  /* Resetting the auto margin from your general button style */
+}
+
+#newsletter-btn:hover {
+  background-color: var(--tertiary-color);
+}
+
+.hidden {
+  display: none;
 }
